@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pas_mobile_2023/pages/home.dart';
+import 'package:get/get.dart';
+import 'package:pas_mobile_2023/routes/page_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,14 +11,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Pas Mobile 2023',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(),
       debugShowCheckedModeBanner: false,
+      initialRoute: "/",
+      getPages: pageRoutes,
     );
   }
 }
