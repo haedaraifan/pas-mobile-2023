@@ -1,8 +1,6 @@
 // To parse this JSON data, do
 //
 //     final productResponseModel = productResponseModelFromJson(jsonString);
-
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 List<ProductResponseModel> productResponseModelFromJson(String str) => List<ProductResponseModel>.from(json.decode(str).map((x) => ProductResponseModel.fromJson(x)));
