@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:pas_mobile_2023/models/coffee_response_model.dart';
+import 'package:pas_mobile_2023/common/models/coffee_response_model.dart';
 
-class CoffeeListController extends GetxController {
+class HomeController extends GetxController {
   RxList<ProductResponseModel> coffeResponseModel = <ProductResponseModel>[].obs;
   RxBool isLoading = true.obs;
 

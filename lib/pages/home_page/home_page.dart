@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pas_mobile_2023/controllers/coffee_list_controller.dart';
-import 'package:pas_mobile_2023/controllers/example_controller.dart';
+import 'package:pas_mobile_2023/pages/home_page/home_controller.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
-  final ExampleController _controller = Get.put(ExampleController());
-  final CoffeeListController coffeeListController = Get.put(CoffeeListController());
+  final homeController = Get.find<HomeController>();
 
   Widget coffeeList() {
-    return Obx(() => coffeeListController.isLoading.value ?
+    return Obx(() => homeController.isLoading.value ?
       const Center(
         child: CircularProgressIndicator()
       ) :
@@ -21,9 +19,9 @@ class HomePage extends StatelessWidget {
           crossAxisSpacing: 10,
         ),
         shrinkWrap: true,
-        itemCount: coffeeListController.coffeResponseModel.length,
+        itemCount: homeController.coffeResponseModel.length,
         itemBuilder: (context, index) {
-          final product = coffeeListController.coffeResponseModel[index];
+          final product = homeController.coffeResponseModel[index];
           return Container(
             color: Colors.green[300],
             child: Padding(
@@ -45,7 +43,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_controller.appBarTitle.value),
+        title: const Text("Ini App Bar"),
       ),
       body: coffeeList(),
     );

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:pas_mobile_2023/widget/button.dart';
+import 'package:pas_mobile_2023/common/routes/route_name.dart';
+import 'package:pas_mobile_2023/common/widget/button.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({Key? key}) : super(key: key);
@@ -43,7 +44,7 @@ class _GetStartedState extends State<GetStarted> {
                 children: [
                   Button(
                     onPressed: () {
-                      Get.toNamed('/login');
+                      Get.toNamed(RouteName.login);
                     },
                     width: size.width * 1,
                     height: size.height * 0.08,
@@ -54,7 +55,7 @@ class _GetStartedState extends State<GetStarted> {
                   SizedBox(height: size.height*0.03,),
                   Button(
                       onPressed: () {
-                        Get.toNamed('/login');
+                        Get.toNamed(RouteName.login);
                       },
                       width: size.width * 1,
                       height: size.height * 0.08,
