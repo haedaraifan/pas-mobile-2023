@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pas_mobile_2023/routes/page_routes.dart';
+import 'package:pas_mobile_2023/common/routes/routes.dart';
 
 void main() {
   runApp(const MyApp());

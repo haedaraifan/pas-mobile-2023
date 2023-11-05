@@ -1,24 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:pas_mobile_2023/pages/splash_screen/splash_controller.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashScreen extends StatelessWidget {
+  SplashScreen({super.key});
 
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-
-  @override
-  void initState() {
-
-    Future.delayed(const Duration(seconds: 4), () {
-      Get.toNamed("/getStarted");
-    });
-    super.initState();
-  }
+  final splashController = Get.find<SplashController>();
 
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:pas_mobile_2023/widget/button.dart';
-import 'package:pas_mobile_2023/widget/input.dart';
+import 'package:pas_mobile_2023/common/routes/route_name.dart';
+import 'package:pas_mobile_2023/common/widget/button.dart';
+import 'package:pas_mobile_2023/common/widget/input.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               children: [
                 IconButton(onPressed: () {
-                  Get.toNamed('/getStarted');
+                  Get.toNamed(RouteName.getStarted);
                 }, icon: Icon(Icons.arrow_back,color: Colors.black,),color: Color(0xfff1f1f1),)
               ],
             ),
@@ -55,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: size.height*0.05,),
                 Button(text: "Sign in", colorB: Color(0xff48d861), colorT: Colors.white, height: size.height*0.08, width: size.width*1, onPressed: () {
-                  Get.toNamed('/home');
+                  Get.offNamed(RouteName.home);
                 },)
               ],
             )
