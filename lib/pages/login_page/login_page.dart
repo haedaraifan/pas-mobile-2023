@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pas_mobile_2023/common/routes/route_name.dart';
+import 'package:pas_mobile_2023/pages/login_page/login_controller.dart';
 import 'package:pas_mobile_2023/common/widget/button.dart';
 import 'package:pas_mobile_2023/common/widget/input.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
+  final loginController = Get.find<LoginController>();
+  final TextEditingController ctrUsername = TextEditingController();
+  final TextEditingController ctrPassword = TextEditingController();
 
-class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    final TextEditingController ctrUsername = TextEditingController();
-    final TextEditingController ctrPassword = TextEditingController();
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
@@ -46,9 +43,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             SizedBox(height: size.height*0.04,),
-            Button(text: "Sign in", colorB: Color(0xff48d861), colorT: Colors.white, height: size.height*0.07, width: size.width*1, onPressed: () {
-              Get.offNamed(RouteName.home);
-            },),
+            Button(text: "Sign in", colorB: Color(0xff48d861), colorT: Colors.white, height: size.height*0.07, width: size.width*1, onPressed: () => loginController.loginAction(ctrUsername.text, ctrPassword.text)),
             SizedBox(height: size.height*0.04,),
             Row(
               children: [
