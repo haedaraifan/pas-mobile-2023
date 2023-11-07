@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:pas_mobile_2023/common/routes/route_name.dart';
 import 'package:pas_mobile_2023/common/widget/button.dart';
 
@@ -29,15 +28,17 @@ class _GetStartedState extends State<GetStarted> {
                 children: [
                   Image.asset(
                     'images/iconG.png',
-                    width: 100,
-                    height: 100,
-                  ),
-                  Image.asset(
-                    'images/iconT.png',
-                    width: 200,
+                    width: 150,
                     height: 150,
                   ),
-                  Text('Brewing Happiness, One Cup at a Time.',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),),
+                  Container(
+                    child: Image.asset(
+                      'images/iconT.png',
+                      width: 200,
+                      height: 150,
+                    ),
+                  ),
+                  Container(child: Text('Brewing Happiness, One Cup at a Time.',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),)),
                 ],
               ),
               Column(
@@ -55,7 +56,7 @@ class _GetStartedState extends State<GetStarted> {
                   SizedBox(height: size.height*0.03,),
                   Button(
                       onPressed: () {
-                        Get.toNamed(RouteName.login);
+                        Get.toNamed(RouteName.register);
                       },
                       width: size.width * 1,
                       height: size.height * 0.08,

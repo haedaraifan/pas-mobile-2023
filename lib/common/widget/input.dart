@@ -7,7 +7,7 @@ class Input extends StatelessWidget {
   const Input({
     required this.hint,
     required this.controller,
-    required this.icon
+    required this.icon,
 });
 
   @override
