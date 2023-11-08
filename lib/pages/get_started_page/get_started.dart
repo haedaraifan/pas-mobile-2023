@@ -16,7 +16,7 @@ class _GetStartedState extends State<GetStarted> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(left: 20.0,right: 20.0, top: 50,bottom: 50),
+        padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 50, bottom: 50),
         child: Container(
           width: size.width * 1,
           height: size.height * 1,
@@ -24,22 +24,36 @@ class _GetStartedState extends State<GetStarted> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(
-                children: [
-                  Image.asset(
-                    'images/iconG.png',
-                    width: 150,
-                    height: 150,
-                  ),
-                  Container(
-                    child: Image.asset(
-                      'images/iconT.png',
-                      width: 200,
-                      height: 150,
+              Container(
+                margin: EdgeInsets.only(top: 150),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Brew",
+                          style: TextStyle(
+                              fontSize: 50,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff070707)),
+                        ),
+                        Text(
+                          "Nook",
+                          style: TextStyle(
+                              fontSize: 50,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff0f8924)),
+                        ),
+                      ],
                     ),
-                  ),
-                  Container(child: Text('Brewing Happiness, One Cup at a Time.',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),)),
-                ],
+                    Container(
+                        child: Text(
+                      'Brewing Happiness, One Cup at a Time.',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                    )),
+                  ],
+                ),
               ),
               Column(
                 children: [
@@ -53,7 +67,9 @@ class _GetStartedState extends State<GetStarted> {
                     colorB: Color(0xff48d861),
                     colorT: Colors.white,
                   ),
-                  SizedBox(height: size.height*0.03,),
+                  SizedBox(
+                    height: size.height * 0.03,
+                  ),
                   Button(
                       onPressed: () {
                         Get.toNamed(RouteName.register);

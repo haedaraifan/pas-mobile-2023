@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:pas_mobile_2023/pages/splash_screen/splash_controller.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -10,12 +11,13 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff48d861),
       body: Center(
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('images/iconG.png', width: 200, height: 200,),
-            Image.asset('images/iconT.png', width: 300, height: 150,),
+            Text("Brew",style: TextStyle(fontSize: 50,fontWeight: FontWeight.bold,color: Color(0xff070707)),),
+            Text("Nook",style: TextStyle(fontSize: 50,fontWeight: FontWeight.bold,color: Color(0xff0f8924)),),
           ],
         ),
       ),
