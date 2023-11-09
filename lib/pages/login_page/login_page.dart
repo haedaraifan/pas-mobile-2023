@@ -126,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: Colors.black, width: 1)),
                         child: Image.asset(
-                          "images/apple.png",
+                          "images/facebook.png",
                           width: 40,
                           height: 40,
                         ),
