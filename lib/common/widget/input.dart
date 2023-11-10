@@ -1,29 +1,16 @@
 import 'package:flutter/material.dart';
 
-class Input extends StatelessWidget {
-  final String hint;
-  final Icon icon;
-  final TextEditingController controller;
-  const Input({
-    required this.hint,
-    required this.controller,
-    required this.icon,
-});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      decoration:InputDecoration(
+Widget Input(BuildContext context, TextEditingController controller,
+    String hint, IconData icon1, bool obsT) {
+  return TextField(
+    controller: controller,
+    obscureText: obsT,
+    decoration: InputDecoration(
         hintText: hint,
-        prefixIcon: icon,
-        border: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.black,)
-        ),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.black)
-        )
-      ),
-    );
-  }
+        prefixIcon: Icon(icon1),
+        filled: true,
+        fillColor: Color(0xffe8ecf4),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)))),
+  );
 }
