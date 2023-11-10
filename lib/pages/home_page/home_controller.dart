@@ -15,9 +15,9 @@ class HomeController extends GetxController {
   void loadData() async {
     try {
 
-      final response = await http.get(
-        Uri.parse("https://fake-coffee-api.vercel.app/api")
-      );
+      final url = Uri.parse("https://fake-coffee-api.vercel.app/api");
+
+      final response = await http.get(url);
 
       if(response.statusCode == 200) {
         coffeResponseModel.value = productResponseModelFromJson(response.body);
