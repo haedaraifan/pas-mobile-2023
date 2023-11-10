@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:pas_mobile_2023/common/routes/route_name.dart';
+import 'package:pas_mobile_2023/pages/register_page/register_binding.dart';
 import 'package:pas_mobile_2023/pages/splash_screen/splash_binding.dart';
 import 'package:pas_mobile_2023/pages/splash_screen/splash_screen.dart';
 import 'package:pas_mobile_2023/pages/get_started_page/get_started.dart';
@@ -27,6 +28,7 @@ List<GetPage> pageRoutes = [
   GetPage(
     name: RouteName.register,
     page: () => RegisterPage(),
+    binding: RegisterBinding()
   ),
   GetPage(
     name: RouteName.home,
