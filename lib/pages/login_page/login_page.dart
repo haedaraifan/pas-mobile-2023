@@ -170,6 +170,18 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
+            Obx(
+              () => loginController.isLoading == true ?
+              Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: Colors.black.withOpacity(0.4),
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ) :
+              const SizedBox()
+            )
           ]
         ),
       ),
