@@ -8,7 +8,6 @@ import '../../pages/home_page/home_controller.dart';
 final homeController = Get.find<HomeController>();
 
 Widget coffeeList(BuildContext context) {
-  final size = MediaQuery.of(context).size;
   final lebar = MediaQuery.of(context).size.width;
   return Obx(() => homeController.isLoading.value ?
   const Center(
