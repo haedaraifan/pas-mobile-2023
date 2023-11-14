@@ -31,4 +31,10 @@ class HomeController extends GetxController {
       print("error : $e");
     }
   }
+
+  List<ProductResponseModel> getDiscountProduts(int limit) {
+    List<ProductResponseModel> sortedProduct = List.from(coffeResponseModel);
+    sortedProduct.sort((a, b) => a.price.compareTo(b.price));
+    return sortedProduct.take(limit).toList();
+  }
 }
