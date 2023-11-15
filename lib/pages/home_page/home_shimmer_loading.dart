@@ -5,7 +5,6 @@ Widget homeShimmerLoading(BuildContext context) {
   Size size = MediaQuery.of(context).size;
   return ListView(
     shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
     children: [
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
