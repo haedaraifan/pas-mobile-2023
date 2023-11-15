@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pas_mobile_2023/common/widget/button_nav.dart';
+import 'package:pas_mobile_2023/common/widget/bottom_navbar.dart';
 import 'package:pas_mobile_2023/common/widget/home_discount_list.dart';
 import 'package:pas_mobile_2023/pages/home_page/home_controller.dart';
 import '../../common/widget/home_coffee_list.dart';
@@ -8,7 +8,7 @@ import 'home_shimmer_loading.dart';
 
 class HomePage extends StatelessWidget {
   final homeController = Get.find<HomeController>();
-  final RxInt currentIndex = 0.obs;
+  final int currentIndex = 0;
   HomePage({super.key});
 
   Widget homeCompletedLoading(BuildContext context) {
@@ -89,7 +89,7 @@ class HomePage extends StatelessWidget {
         homeShimmerLoading(context) :
         homeCompletedLoading(context)
       ),
-      bottomNavigationBar: BottomNavbar(context, currentIndex),
+      bottomNavigationBar: bottomNavbar(context, currentIndex),
     );
   }
 }
