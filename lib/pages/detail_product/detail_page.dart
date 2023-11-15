@@ -110,19 +110,14 @@ class DetailPage extends StatelessWidget {
         width: size.width,
         height: size.height * 0.1,
         decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(
-              color: Colors.black,
-              width: 2.0,
-            ),
-          ),
         ),
         child: Padding(
           padding: EdgeInsets.all(10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(child: Center(child: Text("\$${price}",style: TextStyle(fontSize: 40),))),
+              Container(child: Center(child: Text("\$${price}",style: TextStyle(fontSize: 40),))),
+              SizedBox(width: size.width*0.15,),
               Container(width: 140,height: 50,decoration: BoxDecoration(color: Color(
                   0xff48d861),borderRadius: BorderRadius.circular(15)), child: Center(child: Text("Add to Cart",style: TextStyle(color: Colors.white,fontSize: 18),)))
             ],

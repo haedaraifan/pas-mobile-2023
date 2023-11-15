@@ -34,18 +34,14 @@ Widget coffeeList(BuildContext context) {
               ),
               child: Column(
                 children: [
-                  Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
-                    child: Container(
+                  Container(
+                    width: 200,
+                    height: 135,
+                    child: Image.network(
+                      product.imageUrl,
                       width: 200,
                       height: 135,
-                      child: Image.network(
-                        product.imageUrl,
-                        width: 200,
-                        height: 135,
-                        fit: BoxFit.cover, // Adjust the fit based on your requirements
-                      ),
+                      fit: BoxFit.cover, // Adjust the fit based on your requirements
                     ),
                   ),
                   Padding(
