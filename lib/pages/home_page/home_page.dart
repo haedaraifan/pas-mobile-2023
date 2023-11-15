@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:pas_mobile_2023/common/widget/button_nav.dart';
 import 'package:pas_mobile_2023/common/widget/diskon_list.dart';
+import 'package:pas_mobile_2023/pages/detail_product/detail_page.dart';
 import '../../common/widget/coffe_item.dart';
 
 class HomePage extends StatelessWidget {
@@ -38,7 +40,8 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {m
+                    },
                     icon: Icon(
                       Icons.shopping_bag_outlined,
                       size: 40,

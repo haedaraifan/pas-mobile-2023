@@ -39,6 +39,7 @@ dependencies:
   http:
   carousel_slider:
   google_nav_bar:
+  shimmer:
 
 dev_dependencies:
   flutter_test:
