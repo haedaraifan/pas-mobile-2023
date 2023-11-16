@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../pages/detail_product/detail_page.dart';
-import '../models/coffee_response_model.dart';
+import '../../../pages/cart_page/cart_controller.dart';
+import '../../../pages/detail_product/detail_page.dart';
+import '../../../pages/home_page/home_controller.dart';
+import '../../models/coffee_response_model.dart';
 
-Widget homeCoffeeListItem(BuildContext context, ProductResponseModel item) {
+Widget homeCoffeeListItem(BuildContext context, ProductResponseModel item,VoidCallback addToCart) {
   return GestureDetector(
     onTap: () => Get.to(DetailPage(product: item)),
     child: Container(
@@ -46,18 +48,23 @@ Widget homeCoffeeListItem(BuildContext context, ProductResponseModel item) {
                     fontWeight: FontWeight.bold
                   )
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.08,
-                  height: MediaQuery.of(context).size.width * 0.08,
-                  decoration: const BoxDecoration(
-                    color: Color(0xff00512d),
-                    borderRadius:
-                    BorderRadius.all(Radius.circular(100))),
-                  child: Center(
-                    child: Icon(
-                      Icons.add_rounded,
-                      color: Colors.white,
-                      size: MediaQuery.of(context).size.width * 0.08,
+                GestureDetector(
+                  onTap: () {
+                    Get.find<CartController>().addToCart(item);
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.08,
+                    height: MediaQuery.of(context).size.width * 0.08,
+                    decoration: const BoxDecoration(
+                      color: Color(0xff00512d),
+                      borderRadius:
+                      BorderRadius.all(Radius.circular(100))),
+                    child: Center(
+                      child: Icon(
+                        Icons.add_rounded,
+                        color: Colors.white,
+                        size: MediaQuery.of(context).size.width * 0.08,
+                      ),
                     ),
                   ),
                 )
@@ -70,6 +77,7 @@ Widget homeCoffeeListItem(BuildContext context, ProductResponseModel item) {
   );
 }
 
+
 Widget homeCoffeeList(List<ProductResponseModel> itemList) {
   return GridView.builder(
     shrinkWrap: true,
@@ -78,12 +86,14 @@ Widget homeCoffeeList(List<ProductResponseModel> itemList) {
       crossAxisCount: 2,
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
-      childAspectRatio: 1 / 1.3
+      childAspectRatio: 1 / 1.3,
     ),
     padding: const EdgeInsets.symmetric(horizontal: 10),
     itemCount: itemList.length,
     itemBuilder: (context, index) {
-      return homeCoffeeListItem(context, itemList[index]);
-    }
+      return homeCoffeeListItem(context, itemList[index], () {
+        Get.find<HomeController>().addToCart(itemList[index]);
+      });
+    },
   );
 }

@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:pas_mobile_2023/common/models/coffee_response_model.dart';
 
+import '../cart_page/cart_controller.dart';
+
 class HomeController extends GetxController {
   RxList<ProductResponseModel> coffeResponseModel = <ProductResponseModel>[].obs;
   RxBool isLoading = true.obs;
@@ -31,6 +33,12 @@ class HomeController extends GetxController {
       print("error : $e");
     }
   }
+
+  void addToCart(ProductResponseModel item) {
+    CartController().cartItems.add(item);
+    // You can do other things here if needed
+  }
+
 
   List<ProductResponseModel> getDiscountProduts(int limit) {
     List<ProductResponseModel> sortedProduct = List.from(coffeResponseModel);
