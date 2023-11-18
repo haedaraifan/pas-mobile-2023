@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:pas_mobile_2023/common/models/coffee_response_model.dart';
+import 'package:pas_mobile_2023/common/services/product_service.dart';
 
 class HomeController extends GetxController {
   RxList<ProductResponseModel> coffeResponseModel = <ProductResponseModel>[].obs;
@@ -14,23 +14,8 @@ class HomeController extends GetxController {
   }
 
   void loadData() async {
-    try {
-
-      final url = Uri.parse("https://fake-coffee-api.vercel.app/api");
-
-      final response = await http.get(url);
-
-      if(response.statusCode == 200) {
-        coffeResponseModel.value = productResponseModelFromJson(response.body);
-      } else {
-        print("status code: ${response.statusCode}");
-      }
-
-      isLoading.value = false;
-
-    } catch(e) {
-      print("error : $e");
-    }
+    coffeResponseModel.value = await ProductService.getAll();
+    isLoading.value = false;
   }
 
   List<ProductResponseModel> getDiscountProduts(int limit) {
