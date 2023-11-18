@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pas_mobile_2023/common/widget/bottom_navbar.dart';
 import 'package:pas_mobile_2023/common/widget/home_discount_list.dart';
+import 'package:pas_mobile_2023/common/widget/roast_level_selector.dart';
 import 'package:pas_mobile_2023/pages/home_page/home_controller.dart';
 import '../../common/widget/home_coffee_list.dart';
 import 'home_shimmer_loading.dart';
@@ -11,8 +12,46 @@ class HomePage extends StatelessWidget {
   final int currentIndex = 0;
   HomePage({super.key});
 
+  Widget roastLevel(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            "Roast level",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w700,
+              fontSize: 22,
+            )
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 10),
+          height: MediaQuery.of(context).size.width *  0.1,
+          child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: 6,
+            itemBuilder: (context, index) {
+              return Obx(
+                () => GestureDetector(
+                  onTap: () => homeController.selectRoastLevel(index),
+                  child: RoastLevelSelector(
+                    index: index,
+                    isSelected: homeController.selectedRoastLevel == index,
+                  ),
+                )
+              );
+            }
+          ),
+        )
+      ]
+    );
+  }
+
   Widget homeCompletedLoading(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return ListView(
       children: [
         Padding(
@@ -75,14 +114,19 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: homeDiscountList(context, homeController.getDiscountProduts(4))
         ),
-        homeCoffeeList(homeController.coffeResponseModel)
+        roastLevel(context),
+        homeCoffeeList(
+          homeController.sortProductByRoastLevel(
+            homeController.coffeResponseModel,
+            homeController.selectedRoastLevel.value
+          )
+        )
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Obx(
         () => homeController.isLoading == true ?
