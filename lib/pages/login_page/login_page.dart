@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pas_mobile_2023/common/routes/route_name.dart';
 import 'package:pas_mobile_2023/pages/login_page/login_controller.dart';
 import 'package:pas_mobile_2023/common/widget/button.dart';
 import 'package:pas_mobile_2023/common/widget/input.dart';
@@ -160,9 +161,14 @@ class _LoginPageState extends State<LoginPage> {
                           "don’t have account? ",
                           style: TextStyle(fontSize: 16),
                         ),
-                        Text(
-                          "Sign Up",
-                          style: TextStyle(color: Color(0xff48d861), fontSize: 16),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(RouteName.register);
+                          },
+                          child: Text(
+                            "Sign Up",
+                            style: TextStyle(color: Color(0xff48d861), fontSize: 16),
+                          ),
                         )
                       ],
                     )

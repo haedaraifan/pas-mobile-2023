@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:pas_mobile_2023/common/models/coffee_response_model.dart';
 import 'package:pas_mobile_2023/common/services/product_service.dart';
 
+
 class HomeController extends GetxController {
   RxList<ProductResponseModel> coffeResponseModel = <ProductResponseModel>[].obs;
   RxBool isLoading = true.obs;
