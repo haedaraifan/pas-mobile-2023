@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:pas_mobile_2023/common/models/coffee_response_model.dart';
+
+import '../../common/widget/tambah.dart';
+import '../cart_page/cart_controller.dart';
 
 class DetailPage extends StatelessWidget {
   final ProductResponseModel product;
-  const DetailPage({super.key, required this.product});
+  DetailPage({super.key, required this.product});
+
+  final CartController cartController = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {
@@ -109,8 +116,11 @@ class DetailPage extends StatelessWidget {
             children: [
               Container(child: Center(child: Text("\$${product.price}",style: TextStyle(fontSize: 40),))),
               SizedBox(width: size.width*0.15,),
-              Container(width: 140,height: 50,decoration: BoxDecoration(color: Color(
-                  0xff48d861),borderRadius: BorderRadius.circular(15)), child: Center(child: Text("Add to Cart",style: TextStyle(color: Colors.white,fontSize: 18),)))
+              GestureDetector(
+                onTap: () => cartController.addToCart(context, product),
+                child: Container(width: 140,height: 50,decoration: BoxDecoration(color: Color(
+                    0xff48d861),borderRadius: BorderRadius.circular(15)), child: Center(child: Text("Add to Cart",style: TextStyle(color: Colors.white,fontSize: 18),))),
+              )
             ],
           ),
         ),

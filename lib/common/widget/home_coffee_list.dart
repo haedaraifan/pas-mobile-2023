@@ -1,64 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../pages/cart_page/cart_controller.dart';
-import '../../../pages/detail_product/detail_page.dart';
-import '../../../pages/home_page/home_controller.dart';
-import '../../models/coffee_response_model.dart';
+import 'package:pas_mobile_2023/pages/cart_page/cart_controller.dart';
+import '../../pages/detail_product/detail_page.dart';
+import '../models/coffee_response_model.dart';
 
-Widget homeCoffeeListItem(BuildContext context, ProductResponseModel item,VoidCallback addToCart) {
+Widget homeCoffeeListItem(
+    BuildContext context, ProductResponseModel item, VoidCallback addToCart) {
+  final CartController cartController = Get.put(CartController());
+
+
   return GestureDetector(
     onTap: () => Get.to(DetailPage(product: item)),
     child: Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFF1F1F1),
-        borderRadius: BorderRadius.circular(14)
-      ),
+          color: const Color(0xFFF1F1F1),
+          borderRadius: BorderRadius.circular(14)),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: Image.network(item.imageUrl)
-            ),
-            Text(
-              item.name,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold
-              ),
-              overflow: TextOverflow.ellipsis
-            ),
-            Text(
-              item.description,
-              style: const TextStyle(
-                fontSize: 11
-              ),
-              overflow: TextOverflow.ellipsis
-            ),
+            Expanded(child: Image.network(item.imageUrl)),
+            Text(item.name,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                overflow: TextOverflow.ellipsis),
+            Text(item.description,
+                style: const TextStyle(fontSize: 11),
+                overflow: TextOverflow.ellipsis),
             const SizedBox(height: 2),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "\$${item.price}",
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold
-                  )
-                ),
+                Text(item.price.toString(),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold)),
                 GestureDetector(
-                  onTap: () {
-                    Get.find<CartController>().addToCart(item);
-                  },
+                  onTap: () => cartController.addToCart(context, item),
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.08,
                     height: MediaQuery.of(context).size.width * 0.08,
                     decoration: const BoxDecoration(
-                      color: Color(0xff00512d),
-                      borderRadius:
-                      BorderRadius.all(Radius.circular(100))),
+                        color: Color(0xff00512d),
+                        borderRadius: BorderRadius.all(Radius.circular(100))),
                     child: Center(
                       child: Icon(
                         Icons.add_rounded,
@@ -67,7 +52,7 @@ Widget homeCoffeeListItem(BuildContext context, ProductResponseModel item,VoidCa
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             )
           ],
@@ -76,7 +61,6 @@ Widget homeCoffeeListItem(BuildContext context, ProductResponseModel item,VoidCa
     ),
   );
 }
-
 
 Widget homeCoffeeList(List<ProductResponseModel> itemList) {
   return GridView.builder(
@@ -91,9 +75,7 @@ Widget homeCoffeeList(List<ProductResponseModel> itemList) {
     padding: const EdgeInsets.symmetric(horizontal: 10),
     itemCount: itemList.length,
     itemBuilder: (context, index) {
-      return homeCoffeeListItem(context, itemList[index], () {
-        Get.find<HomeController>().addToCart(itemList[index]);
-      });
+      return homeCoffeeListItem(context, itemList[index], () {},);
     },
   );
 }

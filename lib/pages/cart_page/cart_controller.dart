@@ -1,38 +1,87 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../common/models/coffee_response_model.dart';
 
 class CartController extends GetxController {
-  final List<ProductResponseModel> cartItems = <ProductResponseModel>[].obs;
+  RxList<ProductResponseModel> cartItemList = <ProductResponseModel>[].obs;
+  RxBool isRefresh = false.obs;
+  var isDanaChecked = false.obs;
+  var isGopayChecked = false.obs;
 
-  // Method to add an item to the cart
-  void addToCart(ProductResponseModel item) {
-    cartItems.add(item);
-    update(); // Notify GetX that the data has changed
-  }
-
-  // Method to remove an item from the cart
-  void removeFromCart(ProductResponseModel item) {
-    cartItems.remove(item);
-    update(); // Notify GetX that the data has changed
-  }
-
-  // Method to clear the entire cart
-  void clearCart() {
-    cartItems.clear();
-    update(); // Notify GetX that the data has changed
-  }
-
-  // Method to get the total number of items in the cart
-  int getCartItemCount() {
-    return cartItems.length;
-  }
-
-  // Method to get the total price of items in the cart
-  double getCartTotalPrice() {
-    double total = 0.0;
-    for (ProductResponseModel item in cartItems) {
-      total += item.price;
+  void changeDanaValue(bool value) {
+    isDanaChecked.value = value;
+    if (value) {
+      isGopayChecked.value = false;
     }
-    return total;
   }
+
+  void changeGopayValue(bool value) {
+    isGopayChecked.value = value;
+    if (value) {
+      isDanaChecked.value = false;
+    }
+  }
+
+
+
+  double updateTotalPrice(BuildContext context, double totalPrice){
+    for (var item in cartItemList) {
+      totalPrice += (item.price ?? 0.0) * (item.quantity ?? 1); // Calculate total price based on item prices and quantities
+    }
+    return totalPrice;
+  }
+
+
+  addToCart(BuildContext context, ProductResponseModel newItem) {
+    bool isExisting = false;
+
+    for (var item in cartItemList.value) {
+      if (item.id == newItem.id) {
+        isExisting = true;
+        break;
+      }
+    }
+
+    if (!isExisting) {
+      cartItemList.value.add(newItem);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Item added to cart.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('This item is already in the cart.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+
+    print("add ${newItem.name}");
+    for (var item in cartItemList.value) {
+      print("old data : ${item.name}");
+    }
+  }
+
+  removeFromCart(BuildContext context, String id, String name) {
+    cartItemList.value.removeWhere((item) => item.id == id);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('$name telah dihapus dari keranjang.'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+
+    print("remove $name");
+    for (var item in cartItemList.value) {
+      print("old data : ${item.name}");
+    }
+
+    isRefresh.value = !isRefresh.value;
+  }
+
 }
+
