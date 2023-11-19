@@ -19,6 +19,7 @@ class ProductResponseModel {
     final List<GrindOption> grindOption;
     final int roastLevel;
     final String imageUrl;
+    int? quantity;
 
     ProductResponseModel({
         required this.id,
@@ -32,6 +33,7 @@ class ProductResponseModel {
         required this.grindOption,
         required this.roastLevel,
         required this.imageUrl,
+        this.quantity = 1,
     });
 
     factory ProductResponseModel.fromJson(Map<String, dynamic> json) => ProductResponseModel(
