@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:pas_mobile_2023/common/models/coffee_response_model.dart';
-
-import '../../common/widget/tambah.dart';
 import '../cart_page/cart_controller.dart';
 
 class DetailPage extends StatelessWidget {

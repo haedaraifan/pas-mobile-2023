@@ -12,7 +12,7 @@ class ProductResponseModel {
     final int productResponseModelId;
     final String name;
     final String description;
-    final double price;
+    double price;
     final String region;
     final int weight;
     final List<String> flavorProfile;
