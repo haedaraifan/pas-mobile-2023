@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:pas_mobile_2023/common/routes/route_name.dart';
 import 'package:pas_mobile_2023/pages/cart_page/cart_binding.dart';
 import 'package:pas_mobile_2023/pages/cart_page/cart_page.dart';
+import 'package:pas_mobile_2023/pages/profile_page/profile_binding.dart';
+import 'package:pas_mobile_2023/pages/profile_page/profile_controller.dart';
 import 'package:pas_mobile_2023/pages/register_page/register_binding.dart';
 import 'package:pas_mobile_2023/pages/splash_screen/splash_binding.dart';
 import 'package:pas_mobile_2023/pages/splash_screen/splash_screen.dart';
@@ -11,6 +13,8 @@ import 'package:pas_mobile_2023/pages/login_page/login_page.dart';
 import 'package:pas_mobile_2023/pages/register_page/register_page.dart';
 import 'package:pas_mobile_2023/pages/home_page/home_binding.dart';
 import 'package:pas_mobile_2023/pages/home_page/home_page.dart';
+
+import '../../pages/profile_page/profile_page.dart';
 
 
 
@@ -43,5 +47,10 @@ List<GetPage> pageRoutes = [
       name: RouteName.cart,
       page: () => CartPage(),
       binding: CartBinding()
+  ),
+  GetPage(
+      name: RouteName.profile,
+      page: () => ProfilePage(),
+      binding: ProfileBinding()
   )
 ];

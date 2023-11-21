@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 Widget bottomNavbar(BuildContext context, int currentIndex){
@@ -14,25 +16,25 @@ Widget bottomNavbar(BuildContext context, int currentIndex){
     gap: 4,
     iconSize: size.width * 0.08,
     selectedIndex: currentIndex,
-    // onTabChange: (index) {
-    //   currentIndex = index;
-    //   switch (index) {
-    //     case 0:
-    //       Get.toNamed('/home');
-    //       break;
-    //     case 1:
-    //       Get.toNamed('/favorite');
-    //       break;
-    //     case 2:
-    //       Get.toNamed('/chart');
-    //       break;
-    //     case 3:
-    //       Get.toNamed('/notif');
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    // },
+    onTabChange: (index) {
+      currentIndex = index;
+      switch (index) {
+        case 0:
+          Get.offAllNamed('/home');
+          break;
+        case 1:
+          // Get.toNamed('/favorite');
+          break;
+        case 2:
+          // Get.toNamed('/chart');
+          break;
+        case 3:
+          Get.offAllNamed('/profile');
+          break;
+        default:
+          break;
+      }
+    },
     tabs: const [
       GButton(icon: Icons.home_filled, text: "home"),
       GButton(icon: Icons.search, text: "search"),

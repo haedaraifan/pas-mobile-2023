@@ -5,4 +5,5 @@ abstract class RouteName {
   static const register = "/register";
   static const home = "/home";
   static const cart = "/cart";
+  static const profile = "/profile";
 }
