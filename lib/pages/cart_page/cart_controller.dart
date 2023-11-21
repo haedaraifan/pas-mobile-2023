@@ -7,6 +7,7 @@ class CartController extends GetxController {
   RxBool isRefresh = false.obs;
   RxBool isDanaChecked = false.obs;
   RxBool isGopayChecked = false.obs;
+  RxDouble totalPrice = 0.0.obs;
 
   void changeDanaValue(bool value) {
     isDanaChecked.value = value;
@@ -22,20 +23,28 @@ class CartController extends GetxController {
     }
   }
 
-
-
-  double updateTotalPrice(BuildContext context, double totalPrice){
+  void updateTotalPrice() {
+    double newTotalPrice = 0;
     for (var item in cartItemList) {
-      totalPrice += (item.price ?? 0.0) * (item.quantity ?? 1); // Calculate total price based on item prices and quantities
+      newTotalPrice += item.price;
     }
-    return totalPrice;
+    totalPrice.value = doubleFormatter(newTotalPrice);
   }
 
+  ProductResponseModel updateItemPrice(ProductResponseModel item, int index, int? newQuantity) {
+    double? currentPrice = item.price;
+    int? quantity = item.quantity;
+    double defaultPrice = currentPrice / quantity!;
+
+    item.price = doubleFormatter(defaultPrice * newQuantity!);
+    return item;
+  }
 
   addToCart(BuildContext context, ProductResponseModel newItem) {
     bool isExisting = false;
+    String message;
 
-    for (var item in cartItemList.value) {
+    for (var item in cartItemList) {
       if (item.id == newItem.id) {
         isExisting = true;
         break;
@@ -43,35 +52,63 @@ class CartController extends GetxController {
     }
 
     if (!isExisting) {
-      cartItemList.value.add(newItem);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Item added to cart.'),
-          duration: Duration(seconds: 2),
-        ),
-      );
+      cartItemList.add(newItem);
+      message = 'Item added to cart.';
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('This item is already in the cart.'),
-          duration: Duration(seconds: 2),
-        ),
-      );
+      message = 'This item is already in the cart.';
     }
-  }
-
-  removeFromCart(BuildContext context, String id, String name) {
-    cartItemList.value.removeWhere((item) => item.id == id);
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('$name telah dihapus dari keranjang.'),
-        duration: Duration(seconds: 2),
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+
+    updateTotalPrice();
+  }
+
+  void removeFromCart(BuildContext context, ProductResponseModel product) {
+    cartItemList.removeWhere((item) => item.id == product.id);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${product.name} has been removed from cart.'),
+        duration: const Duration(seconds: 2),
       ),
     );
 
     isRefresh.value = !isRefresh.value;
+    updateTotalPrice();
   }
 
+  void increaseItemQuantity(ProductResponseModel item, int index) {
+    int? newQuantity = item.quantity;
+    if(newQuantity != null) newQuantity++;
+
+    item = updateItemPrice(item, index, newQuantity);
+    item.quantity = newQuantity;
+
+    cartItemList[index] = item;
+    updateTotalPrice();
+  }
+
+  void decreaseItemQuantity(ProductResponseModel item, int index) {
+    if(item.quantity == 1) return;
+
+    int? newQuantity = item.quantity;
+    if(newQuantity != null) newQuantity--;
+
+    item = updateItemPrice(item, index, newQuantity);
+    item.quantity = newQuantity;
+
+    cartItemList[index] = item;
+    updateTotalPrice();
+  }
+
+  double doubleFormatter(double value) {
+    String newValue = value.toStringAsFixed(2);
+    return double.parse(newValue);
+  }
 }
 
