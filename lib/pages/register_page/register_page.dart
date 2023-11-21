@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pas_mobile_2023/pages/register_page/register_controller.dart';
+import '../../common/routes/route_name.dart';
 import '../../common/widget/button.dart';
 import '../../common/widget/input.dart';
 
@@ -128,7 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("already have on account? ",style: TextStyle(fontSize: 16),),
-                          Text("SIGN IN",style: TextStyle(color: Color(0xff48d861),fontSize: 16),)
+                          GestureDetector(onTap:() => Get.offAllNamed(RouteName.login),child: Text("SIGN IN",style: TextStyle(color: Color(0xff48d861),fontSize: 16),))
                         ],
                       )
                     ],
