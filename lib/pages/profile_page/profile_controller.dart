@@ -1,24 +1,36 @@
 import 'package:get/get.dart';
+import 'package:pas_mobile_2023/common/models/user_profile_response_model.dart';
+import 'package:pas_mobile_2023/common/services/user_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileController extends GetxController{
   late final SharedPreferences prefs;
-  RxString username = "".obs;
+  RxBool isLoading = false.obs;
+  Rx<UserData> userData = UserData(
+    username: "username",
+    fullName: "fullName",
+    email: "email@gmail.com"
+  ).obs;
 
   @override
   void onInit() {
     super.onInit();
-    loadData();
+    getProfile();
   }
 
-  loadData() async {
+  getProfile() async {
+    isLoading.value = true;
     prefs = await SharedPreferences.getInstance();
-    username.value = prefs.getString("username") ?? "No Username";
+
+    String? token = prefs.getString("userToken");
+    UserProfileResponseModel responseData = await UserService.getProfile(token!);
+
+    if(responseData.status) userData.value = responseData.data;
+    isLoading.value = false;
   }
 
   signout() async {
     prefs.clear();
     Get.offAllNamed("/login");
   }
-
 }

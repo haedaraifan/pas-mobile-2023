@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 Widget bottomNavbar(BuildContext context, int currentIndex){
@@ -20,7 +19,7 @@ Widget bottomNavbar(BuildContext context, int currentIndex){
       currentIndex = index;
       switch (index) {
         case 0:
-          Get.offAllNamed('/home');
+          Get.toNamed('/home');
           break;
         case 1:
           // Get.toNamed('/favorite');
@@ -29,7 +28,7 @@ Widget bottomNavbar(BuildContext context, int currentIndex){
           // Get.toNamed('/chart');
           break;
         case 3:
-          Get.offAllNamed('/profile');
+          Get.toNamed('/profile');
           break;
         default:
           break;
