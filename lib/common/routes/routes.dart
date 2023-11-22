@@ -13,7 +13,6 @@ import 'package:pas_mobile_2023/pages/login_page/login_page.dart';
 import 'package:pas_mobile_2023/pages/register_page/register_page.dart';
 import 'package:pas_mobile_2023/pages/home_page/home_binding.dart';
 import 'package:pas_mobile_2023/pages/home_page/home_page.dart';
-
 import '../../pages/profile_page/profile_page.dart';
 
 

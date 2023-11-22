@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:pas_mobile_2023/common/models/register_response_model.dart';
 import 'package:pas_mobile_2023/common/models/login_response_model.dart';
+import 'package:pas_mobile_2023/common/models/user_profile_response_model.dart';
 
 class UserService {
   static const baseUrl = "https://mediadwi.com/api/latihan";
@@ -44,6 +45,20 @@ class UserService {
 
       if(response.statusCode == 200) return registerResponseModelFromJson(response.body);
       
+    } catch(e) {
+      print("error : $e");
+    }
+  }
+
+  static Future getProfile(String token) async {
+    try {
+
+      final response = await http.get(
+        Uri.parse("$baseUrl/get-profile?token=$token")
+      );
+
+      if(response.statusCode == 200) return userProfileResponseModelFromJson(response.body);
+
     } catch(e) {
       print("error : $e");
     }

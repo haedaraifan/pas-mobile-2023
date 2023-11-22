@@ -28,9 +28,7 @@ class LoginController extends GetxController {
     ToastMessage.show(responseData.message);
 
     if(responseData.status) {
-      await prefs.setBool("isLogin", true);
       await prefs.setString("userToken", responseData.token);
-      await prefs.setString("username", username);
       Get.offAllNamed(RouteName.home);
     }
   }
