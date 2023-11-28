@@ -28,7 +28,7 @@ Widget bottomNavbar(BuildContext context, int currentIndex){
           // Get.toNamed('/chart');
           break;
         case 3:
-          Get.toNamed('/profile');
+          Get.offNamed('/profile');
           break;
         default:
           break;

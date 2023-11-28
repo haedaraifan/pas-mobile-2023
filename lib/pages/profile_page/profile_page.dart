@@ -16,74 +16,77 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: ListView(
-          children: [
-            SizedBox(height: size.height *  0.04,),
-            const Text(
-              "Profile",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold
-              )
-            ),
-            SizedBox(height: size.height*0.06,),
-            Obx(() => profileController.userPhotoUrl.value == ""
-              ? const CircleAvatar(
-                foregroundImage: AssetImage("images/avatar.png"),
-                radius: 70,
-              )
-              : CircleAvatar(
-                foregroundImage: NetworkImage(profileController.userPhotoUrl.value),
-                radius: 70,
-              )
-            ),
-            Obx(
-              () => Text(
-                profileController.userData.value.username,
-                style: const TextStyle(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: size.height *  0.04,),
+              const Text(
+                "Profile",
+                style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold
                 )
-              )
-            ),
-            Obx(
-              () => Text(
-                profileController.userData.value.email,
-                style: const TextStyle(
-                  fontSize: 22
+              ),
+              SizedBox(height: size.height*0.06,),
+              Obx(() => profileController.userPhotoUrl.value == ""
+                ? const CircleAvatar(
+                  foregroundImage: AssetImage("images/avatar.png"),
+                  radius: 70,
                 )
-              )
-            ),
-            SizedBox(height: size.height*0.05,),
-            const ItemProfile(
-              text: "Settings",
-              icon: Icons.settings,
-              color: Colors.black
-            ),
-            const ItemProfile(
-              text: "My Account",
-              icon: Icons.person,
-              color: Colors.black
-            ),
-            const ItemProfile(
-              text: "Help Center",
-              icon: Icons.help,
-              color: Colors.black
-            ),
-            const ItemProfile(
-              text: "Information",
-              icon: Icons.info,
-              color: Colors.black
-            ),
-            InkWell(
-              onDoubleTap: () => profileController.signout(),
-              child: const ItemProfile(
-                text: "Logout",
-                icon: Icons.login,
-                color: Colors.red
-              )
-            ),
-          ],
+                : CircleAvatar(
+                  foregroundImage: NetworkImage(profileController.userPhotoUrl.value),
+                  radius: 70,
+                )
+              ),
+              Obx(
+                () => Text(
+                  profileController.userData.value.username,
+                  style: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold
+                  )
+                )
+              ),
+              Obx(
+                () => Text(
+                  profileController.userData.value.email,
+                  style: const TextStyle(
+                    fontSize: 22
+                  )
+                )
+              ),
+              SizedBox(height: size.height*0.05,),
+              const ItemProfile(
+                text: "Settings",
+                icon: Icons.settings,
+                color: Colors.black
+              ),
+              const ItemProfile(
+                text: "My Account",
+                icon: Icons.person,
+                color: Colors.black
+              ),
+              const ItemProfile(
+                text: "Help Center",
+                icon: Icons.help,
+                color: Colors.black
+              ),
+              const ItemProfile(
+                text: "Information",
+                icon: Icons.info,
+                color: Colors.black
+              ),
+              InkWell(
+                onDoubleTap: () => profileController.signout(),
+                child: const ItemProfile(
+                  text: "Logout",
+                  icon: Icons.login,
+                  color: Colors.red
+                )
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: bottomNavbar(context, currentIndex),
