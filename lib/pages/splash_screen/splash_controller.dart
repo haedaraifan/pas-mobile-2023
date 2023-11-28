@@ -25,7 +25,7 @@ class SplashController extends GetxController {
 
       responseData.status
       ? Get.offAllNamed(RouteName.home)
-      : Get.offAllNamed(RouteName.login);
+      : Get.offAllNamed(RouteName.getStarted);
     });
   }
 }
