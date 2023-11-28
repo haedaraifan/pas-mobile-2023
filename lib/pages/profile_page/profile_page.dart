@@ -27,11 +27,15 @@ class ProfilePage extends StatelessWidget {
               )
             ),
             SizedBox(height: size.height*0.06,),
-            const CircleAvatar(
-              foregroundImage: AssetImage(
-                "images/avatar.png"
-              ),
-              radius: 70,
+            Obx(() => profileController.userPhotoUrl.value == ""
+              ? const CircleAvatar(
+                foregroundImage: AssetImage("images/avatar.png"),
+                radius: 70,
+              )
+              : CircleAvatar(
+                foregroundImage: NetworkImage(profileController.userPhotoUrl.value),
+                radius: 70,
+              )
             ),
             Obx(
               () => Text(
@@ -71,8 +75,8 @@ class ProfilePage extends StatelessWidget {
               icon: Icons.info,
               color: Colors.black
             ),
-            GestureDetector(
-              onTap:() {},
+            InkWell(
+              onDoubleTap: () => profileController.signout(),
               child: const ItemProfile(
                 text: "Logout",
                 icon: Icons.login,
