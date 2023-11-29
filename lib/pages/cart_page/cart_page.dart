@@ -156,7 +156,7 @@ class CartPage extends StatelessWidget {
               ),
               child: const Center(
                 child: Text(
-                  "Add to Cart",
+                  "Checkout",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18
