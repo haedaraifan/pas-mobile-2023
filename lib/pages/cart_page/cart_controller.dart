@@ -34,13 +34,13 @@ class CartController extends GetxController {
   ProductResponseModel updateItemPrice(ProductResponseModel item, int index, int? newQuantity) {
     double? currentPrice = item.price;
     int? quantity = item.quantity;
-    double defaultPrice = currentPrice / quantity!;
+    double defaultPrice = currentPrice! / quantity!;
 
     item.price = doubleFormatter(defaultPrice * newQuantity!);
     return item;
   }
 
-  addToCart(BuildContext context, ProductResponseModel newItem) {
+  void addToCart(BuildContext context, ProductResponseModel newItem) {
     bool isExisting = false;
     String message;
 
@@ -82,27 +82,43 @@ class CartController extends GetxController {
     updateTotalPrice();
   }
 
-  void increaseItemQuantity(ProductResponseModel item, int index) {
-    int? newQuantity = item.quantity;
-    if(newQuantity != null) newQuantity++;
+  void removeFromCartWithConfirmation(BuildContext context, ProductResponseModel product) {
+    showRemoveConfirmationDialog(context, product);
+  }
 
-    item = updateItemPrice(item, index, newQuantity);
-    item.quantity = newQuantity;
+  void removeFromCartConfirmed(BuildContext context, ProductResponseModel product) {
+    cartItemList.removeWhere((item) => item.id == product.id);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${product.name} has been removed from cart.'),
+        duration: const Duration(seconds: 2),
+      ),
+    );
 
-    cartItemList[index] = item;
     updateTotalPrice();
   }
 
-  void decreaseItemQuantity(ProductResponseModel item, int index) {
-    if(item.quantity == 1) return;
-
+  void increaseItemQuantity(ProductResponseModel item) {
     int? newQuantity = item.quantity;
-    if(newQuantity != null) newQuantity--;
+    if (newQuantity != null) newQuantity++;
 
-    item = updateItemPrice(item, index, newQuantity);
+    item = updateItemPrice(item, cartItemList.indexOf(item), newQuantity);
     item.quantity = newQuantity;
 
-    cartItemList[index] = item;
+    cartItemList[cartItemList.indexOf(item)] = item;
+    updateTotalPrice();
+  }
+
+  void decreaseItemQuantity(ProductResponseModel item) {
+    if (item.quantity == 1) return;
+
+    int? newQuantity = item.quantity;
+    if (newQuantity != null) newQuantity--;
+
+    item = updateItemPrice(item, cartItemList.indexOf(item), newQuantity);
+    item.quantity = newQuantity;
+
+    cartItemList[cartItemList.indexOf(item)] = item;
     updateTotalPrice();
   }
 
@@ -110,5 +126,31 @@ class CartController extends GetxController {
     String newValue = value.toStringAsFixed(2);
     return double.parse(newValue);
   }
-}
 
+  Future<void> showRemoveConfirmationDialog(BuildContext context, ProductResponseModel product) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Remove Item from Cart?'),
+          content: Text('Are you sure you want to remove ${product.name} from your cart?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                removeFromCartConfirmed(context, product); // Pass the context and product
+                Navigator.of(context).pop();
+              },
+              child: const Text('Remove'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}

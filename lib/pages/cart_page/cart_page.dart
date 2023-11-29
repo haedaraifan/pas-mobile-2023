@@ -10,19 +10,21 @@ class CartPage extends StatelessWidget {
   CartPage({Key? key}) : super(key: key);
 
   Widget cartItemList() {
-    return ListView.builder(
-      itemCount: cartController.cartItemList.length,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (BuildContext context, int index) {
-        ProductResponseModel item = cartController.cartItemList[index];
-        return CartItemCard(
-          item: item,
-          onIncrement: () => cartController.increaseItemQuantity(item, index),
-          onDecrement: () => cartController.decreaseItemQuantity(item, index),
-          onRemove: () => cartController.removeFromCart(context, item)
-        );
-      },
+    return Obx(
+          () => ListView.builder(
+        itemCount: cartController.cartItemList.length,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) {
+          ProductResponseModel item = cartController.cartItemList[index];
+          return CartItemCard(
+            item: item,
+            onIncrement: () => cartController.increaseItemQuantity(item),
+            onDecrement: () => cartController.decreaseItemQuantity(item),
+            onRemove: () => cartController.removeFromCartWithConfirmation(context, item),
+          );
+        },
+      ),
     );
   }
 
@@ -32,7 +34,7 @@ class CartPage extends StatelessWidget {
       style: const TextStyle(
         color: Colors.black,
         fontSize: 30,
-      )
+      ),
     );
   }
 
@@ -51,17 +53,13 @@ class CartPage extends StatelessWidget {
               "Cart",
               style: TextStyle(
                 fontSize: 25,
-                fontWeight: FontWeight.bold
+                fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(
               height: size.height * 0.02,
             ),
-            Obx(
-              () => cartController.isRefresh == true
-              ? cartItemList()
-              : cartItemList()
-            ),
+            cartItemList(),
             SizedBox(height: size.height * 0.05),
             const Text(
               "Payment",
@@ -71,7 +69,10 @@ class CartPage extends StatelessWidget {
             Container(
               width: size.width,
               height: size.height * 0.1,
-              decoration: BoxDecoration(border: Border.all(color: Colors.black),borderRadius: BorderRadius.circular(15)),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(15),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -82,11 +83,9 @@ class CartPage extends StatelessWidget {
                       height: 40,
                     ),
                     const SizedBox(width: 10),
-                    const Expanded(
-                      child: Text("Dana")
-                    ),
+                    const Expanded(child: Text("Dana")),
                     Obx(
-                      () => Checkbox(
+                          () => Checkbox(
                         value: cartController.isDanaChecked.value,
                         onChanged: (bool? value) {
                           cartController.changeDanaValue(value ?? false);
@@ -101,7 +100,10 @@ class CartPage extends StatelessWidget {
             Container(
               width: size.width,
               height: size.height * 0.1,
-              decoration: BoxDecoration(border: Border.all(color: Colors.black),borderRadius: BorderRadius.circular(15)),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(15),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -112,11 +114,9 @@ class CartPage extends StatelessWidget {
                       height: 40,
                     ),
                     const SizedBox(width: 10),
-                    const Expanded(
-                      child: Text("Gopay")
-                    ),
+                    const Expanded(child: Text("Gopay")),
                     Obx(
-                      () => Checkbox(
+                          () => Checkbox(
                         value: cartController.isGopayChecked.value,
                         onChanged: (bool? value) {
                           cartController.changeGopayValue(value ?? false);
@@ -132,45 +132,41 @@ class CartPage extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         width: size.width,
-        height: size.height*0.1,
-        decoration:
-          BoxDecoration(
-            color: Colors.white
-          ),
+        height: size.height * 0.1,
+        decoration: BoxDecoration(color: Colors.white),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Row(
             children: [
               const Text(
                 "Total Price ",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700
-                )
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
               ),
               Expanded(
-                child: Obx(() => cartTotalPrice()),
+                child: cartTotalPrice(),
               ),
-              GestureDetector(
-                child: Container(
-                  width: 140,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff48d861),
-                    borderRadius: BorderRadius.circular(15)
+          GestureDetector(
+            child: Container(
+              width: 140,
+              height: 50,
+              decoration: BoxDecoration(
+                  color: const Color(0xff48d861),
+                  borderRadius: BorderRadius.circular(15)
+              ),
+              child: const Center(
+                child: Text(
+                  "Add to Cart",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18
+
                   ),
-                  child: const Center(
-                    child: Text(
-                      "Add to Cart",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18
-                      )
-                    )
-                  )
+                  ),
                 ),
-              )
+              ),
+          ),
             ],
+
           ),
         ),
       ),
