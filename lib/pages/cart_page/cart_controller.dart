@@ -153,4 +153,52 @@ class CartController extends GetxController {
       },
     );
   }
+
+  void checkout(BuildContext context) {
+    if (cartItemList.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Cart is empty. Add items to proceed.'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+
+    if (!isDanaChecked.value && !isGopayChecked.value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Please select a payment method.'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+
+    String paymentMethod = isDanaChecked.value ? 'DANA' : 'GOPAY';
+
+    String note = "Thank you for shopping with us!\nTotal: \$${totalPrice.value}\nPayment Method: $paymentMethod";
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Checkout Note'),
+          content: Text(note),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                cartItemList.clear();
+                totalPrice.value = 0.0;
+                isDanaChecked.value = false;
+                isGopayChecked.value = false;
+              },
+              child: Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
