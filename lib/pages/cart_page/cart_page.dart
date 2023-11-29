@@ -146,6 +146,7 @@ class CartPage extends StatelessWidget {
                 child: cartTotalPrice(),
               ),
           GestureDetector(
+            onTap: () => cartController.checkout(context) ,
             child: Container(
               width: 140,
               height: 50,
