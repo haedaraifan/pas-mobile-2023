@@ -17,6 +17,11 @@ class SplashController extends GetxController {
   void checkSessionLogin() async {
     prefs = await SharedPreferences.getInstance();
     Future.delayed(Duration(seconds: splashDuration), () async {
+      if(prefs.getString("loginType") == "google") {
+        Get.offAllNamed(RouteName.home);
+        return;
+      }
+      
       String userToken = prefs.getString("userToken") ?? "asd";
       final responseData = await UserService.getProfile(userToken) ?? UserProfileResponseModel(
         status: false,
@@ -25,7 +30,7 @@ class SplashController extends GetxController {
 
       responseData.status
       ? Get.offAllNamed(RouteName.home)
-      : Get.offAllNamed(RouteName.login);
+      : Get.offAllNamed(RouteName.getStarted);
     });
   }
 }

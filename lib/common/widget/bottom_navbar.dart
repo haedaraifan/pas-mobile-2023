@@ -19,7 +19,7 @@ Widget bottomNavbar(BuildContext context, int currentIndex){
       currentIndex = index;
       switch (index) {
         case 0:
-          Get.toNamed('/home');
+          Get.offNamed('/home');
           break;
         case 1:
           // Get.toNamed('/favorite');
@@ -28,7 +28,7 @@ Widget bottomNavbar(BuildContext context, int currentIndex){
           // Get.toNamed('/chart');
           break;
         case 3:
-          Get.toNamed('/profile');
+          Get.offNamed('/profile');
           break;
         default:
           break;

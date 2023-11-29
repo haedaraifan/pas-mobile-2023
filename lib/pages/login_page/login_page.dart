@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pas_mobile_2023/common/routes/route_name.dart';
+import 'package:pas_mobile_2023/common/widget/login_icon_button.dart';
 import 'package:pas_mobile_2023/pages/login_page/login_controller.dart';
 import 'package:pas_mobile_2023/common/widget/button.dart';
 import 'package:pas_mobile_2023/common/widget/input.dart';
@@ -110,44 +111,29 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
-                              child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: Colors.black, width: 1)),
-                            child: Image.asset(
+                            child: loginIconButton(
                               "images/google.png",
-                              width: 40,
-                              height: 40,
-                            ),
-                          )),
+                              () => loginController.handleGoogleSignIn()
+                            )
+                          ),
                           SizedBox(
                             width: size.width * 0.04,
                           ),
                           Expanded(
-                              child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: Colors.black, width: 1)),
-                            child: Image.asset(
+                            child:loginIconButton(
                               "images/facebook.png",
-                              width: 40,
-                              height: 40,
-                            ),
-                          )),
+                              () {}
+                            )
+                          ),
                           SizedBox(
                             width: size.width * 0.04,
                           ),
                           Expanded(
-                              child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: Colors.black, width: 1)),
-                            child: Image.asset(
+                            child: loginIconButton(
                               "images/apple.png",
-                              width: 40,
-                              height: 40,
-                            ),
-                          )),
+                              () {}
+                            )
+                          ),
                         ],
                       ),
                     ),

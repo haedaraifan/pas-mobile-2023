@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "146127814895",
+    "project_id": "brewnookproject",
+    "storage_bucket": "brewnookproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146127814895:android:9f28089ad79a220357db1a",
+        "android_client_info": {
+          "package_name": "com.example.pas_mobile_2023"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146127814895-v9p6nbt0u9lrd1qhuckjci9vjuerum8n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0k226gA03qy83ZKtvdZYK6pa-YYSCYOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146127814895-v9p6nbt0u9lrd1qhuckjci9vjuerum8n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
